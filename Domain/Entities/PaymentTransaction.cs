@@ -8,7 +8,7 @@ namespace Domain.Entities
 
         public int PatientId { get; set; }
 
-        public Guid AppointmentId { get; set; }
+        public int AppointmentId { get; set; }
 
         public decimal Amount { get; set; }
 
