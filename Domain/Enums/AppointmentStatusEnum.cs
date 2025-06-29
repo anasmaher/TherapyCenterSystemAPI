@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums
 {
-    internal enum AppointmentStatusEnum
+    public enum AppointmentStatusEnum
     {
         Pending,
         Confirmed,

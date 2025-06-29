@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    internal class SessionNote
+    public class SessionNote
     {
         public int Id { get; set; }
 
@@ -11,5 +11,7 @@
         public string Content { get; set; }
 
         public bool IsLocked { get; set; }
+
+        public virtual Appointment Appointment { get; set; }
     }
 }

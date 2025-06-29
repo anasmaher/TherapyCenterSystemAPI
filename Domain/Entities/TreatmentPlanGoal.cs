@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    internal class TreatmentPlanGoal
+    public class TreatmentPlanGoal
     {
         public int Id { get; set; }
 

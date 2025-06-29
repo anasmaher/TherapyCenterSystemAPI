@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums
 {
-    internal enum ExerciseTypeEnum
+    public enum ExerciseTypeEnum
     {
         Prompt,
         Worksheet,

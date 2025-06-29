@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    internal class ExerciseSubmission
+    public class ExerciseSubmission
     {
         public int Id { get; set; }
 
@@ -17,5 +17,13 @@ namespace Domain.Entities
         public string ReflectionNote { get; set; }
 
         public ExerciseStatusEnum Status { get; set; }
+
+        public virtual ExerciseTemplate ExerciseTemplate { get; set; }
+
+        public virtual Patient Patient { get; set; }
+
+        public virtual Therapist AssignedByTherapist { get; set; }
+
+
     }
 }

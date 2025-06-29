@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    internal class GroupSession
+    public class GroupSession
     {
         public int Id { get; set; }
 
@@ -17,5 +17,9 @@
         public List<int> PatientsIds { get; set; }
 
         public string Notes { get; set; }
+
+        public virtual Therapist Therapist { get; set; }
+
+        public virtual ICollection<GroupSessionParticipant> GroupSessionPatients { get; set; }
     }
 }

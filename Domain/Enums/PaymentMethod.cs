@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums
 {
-    internal enum PaymentMethod
+    public enum PaymentMethod
     {
         Card,
         Fawry,

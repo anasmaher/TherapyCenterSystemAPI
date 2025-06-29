@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums
 {
-    internal enum ExerciseStatusEnum
+    public enum ExerciseStatusEnum
     {
         Pending,
         Completed,

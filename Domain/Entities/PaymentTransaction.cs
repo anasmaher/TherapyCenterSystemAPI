@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    internal class PaymentTransaction
+    public class PaymentTransaction
     {
         public int Id { get; set; }
 
@@ -23,5 +23,9 @@ namespace Domain.Entities
         public string ReferenceCode { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public virtual Patient Patient { get; set; }
+
+        public virtual Appointment Appointment { get; set; }
     }
 }

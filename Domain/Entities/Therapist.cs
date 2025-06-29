@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    internal class Therapist
+    public class Therapist
     {
         public int Id { get; set; }
 
@@ -21,5 +21,15 @@ namespace Domain.Entities
         public int YearsOfExperience { get; set; }
         
         public bool IsAvailable { get; set; } = true;
+
+        public virtual ICollection<Appointment> Appointments { get; set; }
+
+        public virtual ICollection<GroupSession> GroupSessionsLed { get; set; }
+
+        public virtual ICollection<ExerciseSubmission> AssignedExercises { get; set; }
+
+        public virtual ICollection<TreatmentPlan> TreatmentPlans { get; set; }
+
+
     }
 }

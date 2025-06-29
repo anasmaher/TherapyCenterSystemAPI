@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    internal class Patient
+    public class Patient
     {
         public int Id { get; set; }
 
@@ -19,5 +19,15 @@ namespace Domain.Entities
         public string Email { get; set; }
 
         public int AssignedTherapistId { get; set; }
+
+        public virtual ICollection<Appointment> Appointments { get; set; }
+
+        public virtual ICollection<GroupSessionParticipant> GroupSessions { get; set; }
+
+        public virtual ICollection<ExerciseSubmission> ExerciseSubmissions { get; set; }
+
+        public virtual ICollection<PaymentTransaction> Payments { get; set; }
+
+        public virtual ICollection<TreatmentPlan> TreatmentPlans { get; set; }
     }
 }

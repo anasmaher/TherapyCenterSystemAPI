@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums
 {
-    internal enum TreatmentPlanGoalStatusEnum
+    public enum TreatmentPlanGoalStatusEnum
     {
         NotStarted,
         InProgress,

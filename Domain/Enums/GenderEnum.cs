@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums
 {
-    internal enum GenderEnum
+    public enum GenderEnum
     {
         Male,
         Female

@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    internal class ExerciseTemplate
+    public class ExerciseTemplate
     {
         public int Id { get; set; }
 
