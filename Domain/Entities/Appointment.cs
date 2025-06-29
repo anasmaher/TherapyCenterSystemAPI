@@ -14,6 +14,6 @@ namespace Domain.Entities
 
         public string Notes { get; set; }
 
-        public AppointmentStatus Status { get; set; }
+        public AppointmentStatusEnum Status { get; set; }
     }
 }
