@@ -1,6 +1,7 @@
 ﻿using Application.Common.Results;
 using Application.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Patients.Commands.DeletePatient
 {
@@ -15,7 +16,7 @@ namespace Application.Features.Patients.Commands.DeletePatient
 
         public async Task<NonGenericResult> Handle(DeletePatientCommand request, CancellationToken cancellationToken)
         {
-            var patient = await appDbContext.Patients.FindAsync(request.Id);
+            var patient = await appDbContext.Patients.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (patient is null)
                 return NonGenericResult.Fail("Patient not found");
@@ -23,7 +24,7 @@ namespace Application.Features.Patients.Commands.DeletePatient
             appDbContext.Patients.Remove(patient);
             await appDbContext.SaveChangesAsync(cancellationToken);
 
-            return NonGenericResult.Ok();
+            return NonGenericResult.Ok("Patient Updated");
         }
     }
 }

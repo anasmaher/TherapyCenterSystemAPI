@@ -16,8 +16,6 @@ namespace Domain.Entities
 
         public GenderEnum Gender { get; set; }
 
-        public List<string> Specializations { get; set; }
-
         public int YearsOfExperience { get; set; }
         
         public bool IsAvailable { get; set; } = true;
@@ -30,6 +28,7 @@ namespace Domain.Entities
 
         public virtual ICollection<TreatmentPlan> TreatmentPlans { get; set; }
 
+        public ICollection<TherapistSpecialization> Specializations { get; set; } = new HashSet<TherapistSpecialization>();
 
     }
 }

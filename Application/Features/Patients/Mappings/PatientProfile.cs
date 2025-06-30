@@ -11,7 +11,9 @@ namespace Application.Features.Patients.Mappings
         public PatientProfile()
         {
             CreateMap<Patient, PatientDTO>();
+
             CreateMap<CreatePatientCommand, Patient>();
+
             CreateMap<UpdatePatientCommand, Patient>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
         }

@@ -5,6 +5,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
+using Domain.Enums;
 
 namespace Application.Features.Patients.Queries.GetAllPatients;
 
@@ -15,7 +16,7 @@ public class ListPatientsHandler : IRequestHandler<ListPatientsQuery, Result<Pag
 
     private static readonly HashSet<string> AllowedSortFields = new()
     {
-        "FirstName", "LastName", "Gender"
+        "FirstName", "LastName", "DateOfBirth"
     };
 
     public ListPatientsHandler(IAppDbContext appDbContext, IMapper mapper)
@@ -27,6 +28,12 @@ public class ListPatientsHandler : IRequestHandler<ListPatientsQuery, Result<Pag
     public async Task<Result<PaginatedResult<PatientDTO>>> Handle(ListPatientsQuery request, CancellationToken cancellationToken)
     {
         var query = appDbContext.Patients.AsNoTracking();
+
+        if (request.Gender is not null && Enum.TryParse<GenderEnum>(request.Gender, true, out var gender))
+            query = query.Where(p => p.Gender == gender);
+
+        if (request.TherapistId is not null)
+            query = query.Where(p => p.Appointments.Any(a => a.TherapistId == request.TherapistId));
 
         var orderBy = AllowedSortFields.Contains(request.OrderBy) ? request.OrderBy : "FirstName";
 
