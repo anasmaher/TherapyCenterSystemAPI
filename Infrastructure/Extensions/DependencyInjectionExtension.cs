@@ -1,8 +1,12 @@
-﻿using Infrastructure.Data;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
+﻿using Application.Common.Behaviors;
+using Application.Features.Patients.Commands.CreatePatient;
 using Application.Features.Patients.Mappings;
 using Application.Interfaces;
+using FluentValidation;
+using Infrastructure.Data;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Extensions
 {
@@ -11,6 +15,15 @@ namespace Infrastructure.Extensions
         public static IServiceCollection AddMappingProfiles(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(PatientProfile).Assembly);
+
+            return services;
+        }
+
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssembly(typeof(CreatePatientCommand).Assembly);
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             return services;
         }

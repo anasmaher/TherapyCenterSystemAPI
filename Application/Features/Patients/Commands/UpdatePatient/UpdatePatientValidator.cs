@@ -1,12 +1,14 @@
-﻿using Domain.Enums;
+﻿using Application.Features.Patients.Commands.CreatePatient;
+using Domain.Enums;
 using FluentValidation;
 
-namespace Application.Features.Patients.Commands.CreatePatient
+namespace Application.Features.Patients.Commands.UpdatePatient
 {
-    public class CreatePatientValidator : AbstractValidator<CreatePatientCommand>
+    public class UpdatePatientValidator : AbstractValidator<UpdatePatientCommand>
     {
-        public CreatePatientValidator()
+        public UpdatePatientValidator()
         {
+            RuleFor(x => x.Id).GreaterThan(0).WithMessage("ID must be greater than zero.");
             RuleFor(x => x.FirstName).NotEmpty().MaximumLength(100).WithMessage("First name is required and cannot exceed 100 characters.");
             RuleFor(x => x.LastName).NotEmpty().MaximumLength(100).WithMessage("Last name is required and cannot exceed 100 characters.");
             RuleFor(x => x.DateOfBirth).LessThan(DateTime.Today).WithMessage("Date of birth must be in the past.");
