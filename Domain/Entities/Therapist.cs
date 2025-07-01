@@ -28,7 +28,9 @@ namespace Domain.Entities
 
         public virtual ICollection<TreatmentPlan> TreatmentPlans { get; set; }
 
-        public ICollection<TherapistSpecialization> Specializations { get; set; } = new HashSet<TherapistSpecialization>();
+        public virtual ICollection<TherapistSpecialization> Specializations { get; set; } = new List<TherapistSpecialization>();
+
+        public virtual ICollection<TherapistAvailability> Availabilities { get; set; } = new List<TherapistAvailability>();
 
     }
 }

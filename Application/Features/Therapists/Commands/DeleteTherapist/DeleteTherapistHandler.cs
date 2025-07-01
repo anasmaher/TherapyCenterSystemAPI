@@ -26,9 +26,11 @@ namespace Application.Features.Therapists.Commands.DeleteTherapist
 
             appDbContext.Therapists.Remove(therapist);
 
-            await appDbContext.SaveChangesAsync(cancellationToken);
+            var result = await appDbContext.SaveChangesAsync(cancellationToken);
 
-            return NonGenericResult.Ok("Therapist Deleted");
+            return result == 1
+                ? NonGenericResult.Ok("Therapist deleted successfully.")
+                : NonGenericResult.Fail("Failed to delete therapist.");
         }
     }
 }

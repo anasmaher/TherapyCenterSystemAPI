@@ -16,6 +16,7 @@ namespace Application.Interfaces
         DbSet<GroupSession> GroupSessions { get; }
         DbSet<GroupSessionParticipant> GroupSessionParticipants { get; }
         DbSet<PaymentTransaction> PaymentTransactions { get; }
+        DbSet<TherapistSpecialization> TherapistSpecialization { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

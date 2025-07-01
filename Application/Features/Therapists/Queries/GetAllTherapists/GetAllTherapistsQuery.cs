@@ -1,5 +1,6 @@
 ﻿using Application.Common.Results;
 using Application.Features.Therapists.DTOs;
+using Domain.Enums;
 using MediatR;
 
 namespace Application.Features.Therapists.Queries.GetAllTherapists
@@ -10,6 +11,8 @@ namespace Application.Features.Therapists.Queries.GetAllTherapists
         string? Name = null,
         string? Specialization = null,
         string OrderBy = "FirstName",
-        bool Ascending = false
-    ) : IRequest<Result<List<TherapistDTO>>>;
+        bool Ascending = false,
+        GenderEnum? Gender = null,
+        bool AvailableOnly = false
+    ) : IRequest<Result<PaginatedResult<TherapistDTO>>>;
 }

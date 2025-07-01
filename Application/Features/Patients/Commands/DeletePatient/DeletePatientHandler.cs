@@ -22,9 +22,11 @@ namespace Application.Features.Patients.Commands.DeletePatient
                 return NonGenericResult.Fail("Patient not found");
 
             appDbContext.Patients.Remove(patient);
-            await appDbContext.SaveChangesAsync(cancellationToken);
+            var result = await appDbContext.SaveChangesAsync(cancellationToken);
 
-            return NonGenericResult.Ok("Patient Updated");
+            return result == 1
+                ? NonGenericResult.Ok("Patient deleted successfully.")
+                : NonGenericResult.Fail("Failed to delete patient.");
         }
     }
 }

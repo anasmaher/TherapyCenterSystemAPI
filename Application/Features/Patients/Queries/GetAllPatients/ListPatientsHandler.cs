@@ -29,8 +29,8 @@ public class ListPatientsHandler : IRequestHandler<ListPatientsQuery, Result<Pag
     {
         var query = appDbContext.Patients.AsNoTracking();
 
-        if (request.Gender is not null && Enum.TryParse<GenderEnum>(request.Gender, true, out var gender))
-            query = query.Where(p => p.Gender == gender);
+        if (request.Gender is not null)
+            query = query.Where(p => p.Gender == request.Gender);
 
         if (request.TherapistId is not null)
             query = query.Where(p => p.Appointments.Any(a => a.TherapistId == request.TherapistId));

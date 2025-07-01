@@ -22,6 +22,8 @@ namespace Infrastructure.Data
         public DbSet<GroupSession> GroupSessions => Set<GroupSession>();
         public DbSet<GroupSessionParticipant> GroupSessionParticipants => Set<GroupSessionParticipant>();
         public DbSet<PaymentTransaction> PaymentTransactions => Set<PaymentTransaction>();
+        public DbSet<TherapistSpecialization> TherapistSpecialization => Set<TherapistSpecialization>();
+        public DbSet<TherapistAvailability> TherapistAvailabilities => Set<TherapistAvailability>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

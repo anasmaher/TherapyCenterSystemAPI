@@ -29,9 +29,11 @@ namespace Application.Features.Patients.Commands.CreatePatient
             var patient = mapper.Map<Patient>(request);
 
             appDbContext.Patients.Add(patient);
-            await appDbContext.SaveChangesAsync(cancellationToken);
+            var result = await appDbContext.SaveChangesAsync(cancellationToken);
 
-            return Result<int>.Ok(patient.Id);
+            return result == 1
+                ? Result<int>.Ok(patient.Id)
+                : Result<int>.Fail("Failed to create patient.");
         }
     }
 }

@@ -36,11 +36,13 @@ namespace Application.Features.Therapists.Commands.CreateTherapist
             })
             .ToList();
 
-            await appDbContext.Therapists.AddAsync(therapist);
+            await appDbContext.Therapists.AddAsync(therapist, cancellationToken);
 
-            await appDbContext.SaveChangesAsync(cancellationToken);
+            var result = await appDbContext.SaveChangesAsync(cancellationToken);
 
-            return Result<int>.Ok(therapist.Id);
+            return result == 1 ?
+                Result<int>.Ok(therapist.Id)
+                : Result<int>.Fail("Failed to create therapist.");
         }
     }
 }

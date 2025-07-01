@@ -1,5 +1,6 @@
 ﻿using Application.Common.Results;
 using Application.Features.Patients.DTOs;
+using Domain.Enums;
 using MediatR;
 
 namespace Application.Features.Patients.Queries.GetAllPatients
@@ -9,7 +10,7 @@ namespace Application.Features.Patients.Queries.GetAllPatients
     int pageSize = 10,
     string? OrderBy = "FirstName",
     bool Ascending = true,
-    string? Gender = null,
+    GenderEnum? Gender = null,
     int? TherapistId = null
 ) : IRequest<Result<PaginatedResult<PatientDTO>>>;
 

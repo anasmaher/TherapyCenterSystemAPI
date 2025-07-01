@@ -23,9 +23,14 @@ namespace Application.Features.Therapists.Queries.GetTherapistById
             var therapist = await appDbContext.Therapists
                 .AsNoTracking()
                 .Include(x => x.Specializations)
-
                 .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
+            if (therapist is null)
+                return Result<TherapistDTO>.Fail("Therapist not found");
+
+            var dto = mapper.Map<TherapistDTO>(therapist);
+
+            return Result<TherapistDTO>.Ok(dto);
         }
     }
 }

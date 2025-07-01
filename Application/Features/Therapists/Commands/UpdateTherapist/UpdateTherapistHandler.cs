@@ -41,8 +41,10 @@ public class UpdateTherapistHandler : IRequestHandler<UpdateTherapistCommand, No
             });
         }
 
-        await appDbContext.SaveChangesAsync(cancellationToken);
+        var result = await appDbContext.SaveChangesAsync(cancellationToken);
 
-        return NonGenericResult.Ok("Therapist updated.");
+        return result == 1
+            ? NonGenericResult.Ok("Therapist updated successfully.")
+            : NonGenericResult.Fail("Failed to update therapist.");
     }
 }

@@ -10,8 +10,6 @@
 
         public string Diagnosis { get; set; }
 
-        public string Goals { get; set; }
-
         public virtual Patient Patient { get; set; }
 
         public virtual Therapist Therapist { get; set; }

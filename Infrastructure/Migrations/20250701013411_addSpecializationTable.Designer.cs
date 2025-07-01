@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250701013411_addSpecializationTable")]
+    partial class addSpecializationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Notes")
@@ -39,9 +42,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -343,33 +343,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Therapists");
                 });
 
-            modelBuilder.Entity("Domain.Entities.TherapistAvailability", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DayOfWeek")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("EndTime")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("StartTime")
-                        .HasColumnType("time");
-
-                    b.Property<int>("TherapistId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TherapistId");
-
-                    b.ToTable("TherapistAvailabilities");
-                });
-
             modelBuilder.Entity("Domain.Entities.TherapistSpecialization", b =>
                 {
                     b.Property<int>("TherapistId")
@@ -383,7 +356,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("Name");
 
-                    b.ToTable("TherapistSpecialization");
+                    b.ToTable("TherapistSpecializations");
                 });
 
             modelBuilder.Entity("Domain.Entities.TreatmentPlan", b =>
@@ -395,6 +368,10 @@ namespace Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Diagnosis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Goals")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -558,17 +535,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Appointment");
                 });
 
-            modelBuilder.Entity("Domain.Entities.TherapistAvailability", b =>
-                {
-                    b.HasOne("Domain.Entities.Therapist", "Therapist")
-                        .WithMany("Availabilities")
-                        .HasForeignKey("TherapistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Therapist");
-                });
-
             modelBuilder.Entity("Domain.Entities.TherapistSpecialization", b =>
                 {
                     b.HasOne("Domain.Entities.Therapist", "Therapist")
@@ -640,8 +606,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Appointments");
 
                     b.Navigation("AssignedExercises");
-
-                    b.Navigation("Availabilities");
 
                     b.Navigation("GroupSessionsLed");
 
